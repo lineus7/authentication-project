@@ -21,9 +21,12 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
   try {
     const body: LoginInput = req.body;
+    const user = await UserController.verifyUser(body);
+
+    res.status(200).json(user);
   } catch (error) {
     const { statusCode, message } = errorHandler(error);
     res.status(statusCode).json({ error: message });

@@ -23,5 +23,12 @@ export class UserController {
   }
   static async verifyUser(body: LoginInput) {
     loginSchema.parse(body); //Validation
+
+    const user = await prisma.user.findFirst({
+      where: { username: body.username },
+    });
+    if (!user) throw new Error("user not found");
+
+    return user;
   }
 }

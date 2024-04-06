@@ -1,10 +1,11 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { ZodError } from "zod";
+import { ErrorHandler } from "../type";
 
 export const errorHandler = (error: unknown) => {
   console.log(error);
 
-  const errorStatus = {
+  const errorStatus: ErrorHandler = {
     statusCode: 500,
     message: "Internal server error",
   };
@@ -12,12 +13,13 @@ export const errorHandler = (error: unknown) => {
   //Prisma Error
   if (error instanceof PrismaClientKnownRequestError) {
     //Unique Constraint
-    if (error.code === "P2002" && error.meta) {
+    if (error.code === "P2002" && error.meta && "target" in error.meta) {
       errorStatus.statusCode = 400;
-      if (error.meta.target === "username") {
+      const target = error.meta.target as string[];
+      if (target[0] === "username") {
         errorStatus.message = "Username already registered";
       }
-      if (error.meta.target === "phoneNumber") {
+      if (target[0] === "phoneNumber") {
         errorStatus.message = "Phone number already registered";
       }
     }
@@ -26,7 +28,7 @@ export const errorHandler = (error: unknown) => {
   //Validation Error
   if (error instanceof ZodError) {
     errorStatus.statusCode = 400;
-    errorStatus.message = error.issues[0].message;
+    errorStatus.message = error.issues;
   }
 
   return errorStatus;
