@@ -3,3 +3,8 @@ export interface RegisterInput {
   password: string;
   phoneNumber: string;
 }
+
+export interface LoginInput {
+  username: string;
+  password: string;
+}
