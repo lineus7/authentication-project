@@ -31,5 +31,13 @@ export const errorHandler = (error: unknown) => {
     errorStatus.message = error.issues;
   }
 
+  //Custom Error
+  if (error instanceof Error) {
+    if (error.message === "invalid login") {
+      errorStatus.statusCode = 404;
+      errorStatus.message = "Invalid Username/Password";
+    }
+  }
+
   return errorStatus;
 };

@@ -24,17 +24,28 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const body: LoginInput = req.body;
-    const user = await UserController.verifyUser(body);
+    const token = await UserController.verifyUser(body);
 
-    res.status(200).json(user);
+    res.cookie("token", token, {
+      maxAge: 86400000,
+      httpOnly: true,
+    });
+
+    res.cookie("userLogin", body.username, {
+      maxAge: 86400000,
+    });
+
+    res.status(200).json({ message: "Success Login" });
   } catch (error) {
     const { statusCode, message } = errorHandler(error);
     res.status(statusCode).json({ error: message });
   }
 });
 
-app.post("/logout", (req, res) => {
-  res.send("Hello World!");
+app.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.clearCookie("userLogin");
+  res.status(200).json({ message: "Success Logout" });
 });
 
 app.listen(port, () => {
