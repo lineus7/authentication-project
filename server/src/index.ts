@@ -3,10 +3,12 @@ import express from "express";
 import { LoginInput, RegisterInput } from "./type";
 import { errorHandler } from "./util/errorHandler";
 import { UserController } from "./controller/user-controller";
+import cors from "cors";
 
 const app = express();
 const port = process.env.EXPRESS_PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 
 app.post("/register", async (req, res) => {
