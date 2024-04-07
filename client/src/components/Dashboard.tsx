@@ -1,8 +1,10 @@
+import { useState } from "react";
 import DashboardCard from "./DashboardCard";
 import DashboardHeader from "./DashboardHeader";
 import DashboardTimestamp from "./DashboardTimestamp";
 
 const Dashboard = () => {
+  const [data] = useState([true, false, false, true, false, true, true, true]);
   return (
     <div className="card w-full bg-white p-6 text-black">
       <DashboardHeader />
@@ -17,14 +19,9 @@ const Dashboard = () => {
 
         {/* LineGraph Grid */}
         <div className=" grid grid-cols-4 w-full gap-4">
-          <DashboardCard />
-          <DashboardCard />
-          <DashboardCard />
-          <DashboardCard />
-          <DashboardCard />
-          <DashboardCard />
-          <DashboardCard />
-          <DashboardCard />
+          {data.map((value, index) => (
+            <DashboardCard isPositive={value} key={index} />
+          ))}
         </div>
         {/* LineGraph Grid End */}
       </div>
