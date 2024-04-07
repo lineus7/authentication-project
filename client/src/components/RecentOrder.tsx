@@ -13,7 +13,7 @@ const RecentOrder = () => {
       {/* Header End */}
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-neutral-content">
+      <div className="overflow-x-auto rounded-xl border border-neutral-content my-6">
         <table className="table">
           {/* Head */}
           <thead>
