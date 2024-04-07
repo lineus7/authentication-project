@@ -1,15 +1,19 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
 import LoginLayout from "./layouts/LoginLayout";
 import RegisterPage from "./views/RegisterPage";
+import RootLayout from "./layouts/RootLayout";
+import HomePage from "./views/HomePage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <div>Hello World</div>,
-    loader: () => {
-      return redirect("/login");
-    },
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+    ],
   },
   {
     element: <LoginLayout />,
