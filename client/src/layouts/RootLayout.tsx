@@ -19,9 +19,7 @@ const RootLayout = () => {
         {/* NavBar */}
         <NavBar />
         {/* NavBar */}
-        <div className="p-4 bg-orange-200">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
       {/* Content End */}
     </div>
