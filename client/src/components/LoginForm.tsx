@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LoginFormFooter from "./LoginFormFooter";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -101,21 +102,7 @@ const LoginForm = () => {
       {/* Form End */}
 
       {/* Form Footer */}
-      <div className="flex justify-between my-6">
-        {/* Remember Me */}
-        <div className="flex justify-center items-center">
-          <input type="checkbox" name="radio-1" className="radio" />
-          <label className="label-text text-black font-medium text-base mx-4">
-            Remember Me
-          </label>
-        </div>
-        {/* Remember Me End */}
-        <div>
-          <p className="label-text text-green-600 font-medium text-base cursor-pointer">
-            Forgot Password?
-          </p>
-        </div>
-      </div>
+      <LoginFormFooter />
       {/* Form Footer End */}
 
       <button className="btn btn-success w-full text-white">Login</button>
