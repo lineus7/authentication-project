@@ -21,9 +21,6 @@ const DashboardCard = ({ data = [10, 20, 15, 25] }) => {
           viewBox="0 0 24 24"
           fill="none"
           stroke="#000000"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
           className=" cursor-pointer"
         >
           <circle cx="12" cy="12" r="1"></circle>
@@ -48,9 +45,6 @@ const DashboardCard = ({ data = [10, 20, 15, 25] }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="#7ed321"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
             >
               <path d="M12 19V6M5 12l7-7 7 7" />
             </svg>
