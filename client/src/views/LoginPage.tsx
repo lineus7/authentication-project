@@ -1,11 +1,5 @@
 const LoginPage = () => {
-  return (
-    <div>
-      {/* Left */}
-      <div></div>
-      <div></div>
-    </div>
-  );
+  return <div>Hello</div>;
 };
 
 export default LoginPage;
