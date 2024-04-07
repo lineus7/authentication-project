@@ -5,9 +5,7 @@ const RecentOrder = () => {
       <div className="flex flex-row justify-between items-center">
         <p className=" font-semibold my-4">Recent Order</p>
         <select className="select border border-neutral-content w-full max-w-xs">
-          <option disabled selected>
-            Last hours
-          </option>
+          <option>Last hours</option>
           <option>Last weeks</option>
           <option>Last months</option>
         </select>
