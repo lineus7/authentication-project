@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import LoginHeader from "../components/LoginHeader";
+import RegisterHeader from "../components/RegisterHeader";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className=" h-full p-24 bg-white text-black">
       {/* Login Container */}
       <div className=" h-full">
-        <LoginHeader />
-        <p className="text-2xl font-semibold my-8">Login to your account</p>
+        <RegisterHeader />
+        <p className="text-2xl font-semibold my-8 text-green-600">User Info</p>
         <LoginForm />
         {/* OAuth */}
         <div className="flex gap-4 my-6">
@@ -29,4 +29,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
