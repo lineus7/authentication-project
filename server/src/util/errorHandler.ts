@@ -28,7 +28,7 @@ export const errorHandler = (error: unknown) => {
   //Validation Error
   if (error instanceof ZodError) {
     errorStatus.statusCode = 400;
-    errorStatus.message = error.issues;
+    errorStatus.message = error.issues[0].message;
   }
 
   //Custom Error

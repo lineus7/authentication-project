@@ -1,6 +1,6 @@
 export interface ErrorHandler {
   statusCode: number;
-  message: string | any[];
+  message: string;
 }
 
 export interface RegisterInput {
