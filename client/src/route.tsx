@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
 import LoginLayout from "./layouts/LoginLayout";
 import RegisterPage from "./views/RegisterPage";
@@ -7,6 +7,10 @@ import HomePage from "./views/HomePage";
 
 export const router = createBrowserRouter([
   {
+    loader: () => {
+      if (document.cookie.includes("userLogin")) return null;
+      return redirect("/login");
+    },
     element: <RootLayout />,
     children: [
       {
@@ -16,6 +20,10 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    loader: () => {
+      if (document.cookie.includes("userLogin")) return redirect("/");
+      return null;
+    },
     element: <LoginLayout />,
     children: [
       {
