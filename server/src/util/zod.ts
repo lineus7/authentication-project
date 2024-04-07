@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-  username: z.string().min(4, "Username must be 4 or more characters long"),
+  email: z.string().email("Input must be email"),
   password: z.string().min(6, "Password must be 6 or more characters long"),
   phoneNumber: z
     .string()
@@ -9,6 +9,6 @@ export const registerSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  username: z.string().min(4, "Username must be 4 or more characters long"),
+  email: z.string().email("Input must be email"),
   password: z.string().min(6, "Password must be 6 or more characters long"),
 });

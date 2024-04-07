@@ -11,12 +11,12 @@ export class UserController {
     //Create Data
     const user = await prisma.user.create({
       data: {
-        username: body.username,
+        email: body.email,
         password: body.password,
         phone_number: body.phoneNumber,
       },
       select: {
-        username: true,
+        email: true,
         phone_number: true,
       },
     });
@@ -27,10 +27,10 @@ export class UserController {
     loginSchema.parse(body); //Validation
 
     const user = await prisma.user.findFirst({
-      where: { username: body.username },
+      where: { email: body.email },
       select: {
         id: true,
-        username: true,
+        email: true,
         password: true,
       },
     });
@@ -38,7 +38,7 @@ export class UserController {
     const isVerified = verifyPassword(body.password, user.password);
     if (!isVerified) throw new Error("invalid login");
 
-    const token = createToken({ id: user.id, username: user.username });
+    const token = createToken({ id: user.id, username: user.email });
     return token;
   }
 }

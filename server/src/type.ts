@@ -4,12 +4,12 @@ export interface ErrorHandler {
 }
 
 export interface RegisterInput {
-  username: string;
+  email: string;
   password: string;
   phoneNumber: string;
 }
 
 export interface LoginInput {
-  username: string;
+  email: string;
   password: string;
 }

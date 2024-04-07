@@ -31,7 +31,7 @@ app.post("/login", async (req, res) => {
       httpOnly: true,
     });
 
-    res.cookie("userLogin", body.username, {
+    res.cookie("userLogin", body.email, {
       maxAge: 86400000,
     });
 
