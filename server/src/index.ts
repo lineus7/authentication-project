@@ -8,7 +8,7 @@ import cors from "cors";
 const app = express();
 const port = process.env.EXPRESS_PORT || 3000;
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 
 app.post("/register", async (req, res) => {
