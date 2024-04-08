@@ -16,8 +16,8 @@ export const errorHandler = (error: unknown) => {
     if (error.code === "P2002" && error.meta && "target" in error.meta) {
       errorStatus.statusCode = 400;
       const target = error.meta.target as string[];
-      if (target[0] === "username") {
-        errorStatus.message = "Username already registered";
+      if (target[0] === "email") {
+        errorStatus.message = "Email already registered";
       }
       if (target[0] === "phone_number") {
         errorStatus.message = "Phone number already registered";
@@ -35,7 +35,7 @@ export const errorHandler = (error: unknown) => {
   if (error instanceof Error) {
     if (error.message === "invalid login") {
       errorStatus.statusCode = 404;
-      errorStatus.message = "Invalid Username/Password";
+      errorStatus.message = "Invalid Email/Password";
     }
   }
 
