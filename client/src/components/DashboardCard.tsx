@@ -1,3 +1,4 @@
+//@ts-ignore
 import LineGraph from "react-line-graph";
 
 const DashboardCard = ({ isPositive }: { isPositive: boolean }) => {
