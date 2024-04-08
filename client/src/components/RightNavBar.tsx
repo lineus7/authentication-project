@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getCookie } from "../utils/getCookies";
 
 const url = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
@@ -46,7 +47,7 @@ const RightNavBar = () => {
       {/* Personal Info */}
       <div className="text-right text-sm">
         <p className=" font-bold">User</p>
-        <p>user@mail.com</p>
+        <p>{getCookie("userLogin")}</p>
       </div>
 
       {/* Avatar */}

@@ -4,11 +4,12 @@ import LoginLayout from "./layouts/LoginLayout";
 import RegisterPage from "./views/RegisterPage";
 import RootLayout from "./layouts/RootLayout";
 import HomePage from "./views/HomePage";
+import { getCookie } from "./utils/getCookies";
 
 export const router = createBrowserRouter([
   {
     loader: () => {
-      if (document.cookie.includes("userLogin")) return null;
+      if (getCookie("userLogin")) return null;
       return redirect("/login");
     },
     element: <RootLayout />,
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
   },
   {
     loader: () => {
-      if (document.cookie.includes("userLogin")) return redirect("/");
+      if (getCookie("userLogin")) return redirect("/");
       return null;
     },
     element: <LoginLayout />,
