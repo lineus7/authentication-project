@@ -1,19 +1,68 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import LoginFormFooter from "./LoginFormFooter";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+const url = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const controller = new AbortController();
+  const signal = controller.signal;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [name]: value });
   };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const response = await fetch(url + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(form),
+        signal,
+      });
+      if (response.ok) {
+        navigate("/");
+      } else {
+        const responseJson = await response.json();
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: responseJson.error,
+        });
+      }
+      setIsLoading(false);
+    } catch (error: any) {
+      setIsLoading(false);
+      console.error(error);
+
+      if (error.name !== "Abort Error")
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something is wrong",
+        });
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      controller.abort();
+    };
+  }, []);
   return (
     <>
       {/* Form */}
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* Email Account */}
         <label className="form-control w-full my-6">
           <div className="label">
@@ -99,14 +148,19 @@ const LoginForm = () => {
           </label>
         </label>
         {/* Password End */}
+
+        {/* Form Footer */}
+        <LoginFormFooter />
+        {/* Form Footer End */}
+        <button className="btn btn-success w-full text-white">
+          {isLoading ? (
+            <span className="loading loading-spinner loading-xs"></span>
+          ) : (
+            "Login"
+          )}
+        </button>
       </form>
       {/* Form End */}
-
-      {/* Form Footer */}
-      <LoginFormFooter />
-      {/* Form Footer End */}
-
-      <button className="btn btn-success w-full text-white">Login</button>
     </>
   );
 };
