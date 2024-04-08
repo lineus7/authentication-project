@@ -19,7 +19,7 @@ export const errorHandler = (error: unknown) => {
       if (target[0] === "username") {
         errorStatus.message = "Username already registered";
       }
-      if (target[0] === "phoneNumber") {
+      if (target[0] === "phone_number") {
         errorStatus.message = "Phone number already registered";
       }
     }
